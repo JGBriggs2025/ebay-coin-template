@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>eBay Silver & Coin Listing Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    textarea {
+      height: 100px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 30px;
+      white-space: pre-wrap;
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🪙 eBay Coin Listing Generator</h1>
+
+  <label>Item Title:</label>
+  <input type="text" id="title">
+
+  <label>Image URLs (comma-separated):</label>
+  <input type="text" id="images">
+
+  <label>Item Description:</label>
+  <textarea id="description"></textarea>
+
+  <label>Metal Content:</label>
+  <input type="text" id="metal">
+
+  <label>Weight:</label>
+  <input type="text" id="weight">
+
+  <label>Year:</label>
+  <input type="text" id="year">
+
+  <label>Mint Mark:</label>
+  <input type="text" id="mint">
+
+  <label>Condition:</label>
+  <input type="text" id="condition">
+
+  <label>Price:</label>
+  <input type="text" id="price">
+
+  <label>Shipping Info:</label>
+  <input type="text" id="shipping">
+
+  <label>Location:</label>
+  <input type="text" id="location">
+
+  <label>Returns Policy:</label>
+  <input type="text" id="returns">
+
+  <button onclick="generate()">Generate Listing</button>
+
+  <div id="output"></div>
+
+  <script>
+    function generate() {
+      const title = document.getElementById("title").value;
+      const images = document.getElementById("images").value.split(",");
+      const description = document.getElementById("description").value;
+      const metal = document.getElementById("metal").value;
+      const weight = document.getElementById("weight").value;
+      const year = document.getElementById("year").value;
+      const mint = document.getElementById("mint").value;
+      const condition = document.getElementById("condition").value;
+      const price = document.getElementById("price").value;
+      const shipping = document.getElementById("shipping").value;
+      const location = document.getElementById("location").value;
+      const returns = document.getElementById("returns").value;
+
+      let imageHTML = images.map(url => `<img src="${url.trim()}" alt="Coin Image" style="max-width:200px; margin:5px;">`).join("");
+
+      const outputHTML = \`
+<div style="font-family:Arial,sans-serif;color:#333;">
+  <h2 style="text-align:center;">\${title}</h2>
+  <div style="text-align:center;">\${imageHTML}</div>
+
+  <h3>📝 Description</h3>
+  <p>\${description}</p>
+  <p><strong>Metal Content:</strong> \${metal}</p>
+  <p><strong>Weight:</strong> \${weight}</p>
+  <p><strong>Year:</strong> \${year}</p>
+  <p><strong>Mint Mark:</strong> \${mint}</p>
+  <p><strong>Condition:</strong> \${condition}</p>
+
+  <h3>📄 Certificate of Authenticity</h3>
+  <p>This item comes with a Certificate of Authenticity verifying the weight and metal content.</p>
+
+  <h3>💵 Price & Shipping</h3>
+  <ul>
+    <li><strong>Price:</strong> \${price}</li>
+    <li><strong>Shipping:</strong> \${shipping}</li>
+    <li><strong>Ships From:</strong> \${location}</li>
+    <li><strong>Returns:</strong> \${returns}</li>
+  </ul>
+
+  <h3>💳 Payment</h3>
+  <p>We accept PayPal. Payment due within 48 hours of purchase.</p>
+  <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Accepted">
+
+  <h3>📦 Bundle & Save</h3>
+  <p style="background:#f8f8f8;padding:10px;border:1px dashed #ccc;">Buy 2 or more items and receive 10% off your total purchase — automatically applied at checkout!</p>
+
+  <h3>🔒 Satisfaction Guarantee</h3>
+  <p>Your satisfaction is important. Please contact us before leaving feedback if there's any issue.</p>
+
+  <hr>
+  <p style="text-align:center;">Thank you for visiting our store!</p>
+</div>
+\`;
+
+      document.getElementById("output").textContent = outputHTML;
+    }
+  </script>
+
+</body>
+</html>
